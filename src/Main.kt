@@ -51,7 +51,7 @@ fun main(){
 
         println("""
             
-           ------------------------------
+           -------------------------------
             PARTIDA ${partida+1}
         """.trimIndent())
         for (tirada in 0 until tiradesGuardades[partida].size - 1) {
