@@ -17,7 +17,7 @@ fun main(){
 
     // Llegim el número de partides que volem jugar
     do {
-        println("Quantes partides vols jugar? (de 1 a 3)")
+        print("Quantes partides vols jugar? (de 1 a 3) ▶")
         partides = readLine()?.toIntOrNull()
 
         if (partides != null && (partides < 1 || partides > 3)){
@@ -29,7 +29,7 @@ fun main(){
     // Llegim el número de quantes tirades volem fer per cada partida
     do {
         println("--------------------------------------------------------")
-        println("Quantes tirades vols fer per cada partida? (de 1 a 6)")
+        print("Quantes tirades vols fer per cada partida? (de 1 a 6) ▶ ")
         tiradesPerPartida = readLine()?.toIntOrNull()
 
         if (tiradesPerPartida != null && (tiradesPerPartida < 1 || tiradesPerPartida > 6)){
@@ -49,11 +49,16 @@ fun main(){
         var acumuladorCPU: Int = 0
         var tiradaActual: Int = 0
 
+        println("""
+            
+           ------------------------------
+            PARTIDA ${partida+1}
+        """.trimIndent())
         for (tirada in 0 until tiradesGuardades[partida].size - 1) {
             /** Tirades persona **/
-            println("Tira el dau! (Intent $tirada)")
+            println("Tira el dau! (Intent ${tirada+1})")
             tiradaActual = Random.nextInt(1, 6 + 1)
-            println("Has tret un ${CARES_DAU[tiradaActual-1]} !")
+            println("Has tret un ${CARES_DAU[tiradaActual-1]} ($tiradaActual)! \n")
 
             // Guardem la tirada
             tiradesGuardades[partida][tirada] = tiradaActual
@@ -62,22 +67,24 @@ fun main(){
             tiradesGuardades[partida][tiradesPerPartida] += tiradaActual
 
             /** Tirades CPU **/
-            println("La CPU tira el dau! (Intent $tirada)")
+            println("La CPU tira el dau! (Intent ${tirada+1})")
             tiradaCPU = Random.nextInt(1, 6 + 1)
             acumuladorCPU += tiradaCPU
-            println("Ha tret un ${CARES_DAU[tiradaCPU-1]} !")
+            println("Ha tret un ${CARES_DAU[tiradaCPU-1]} ($tiradaCPU)! \n")
         }
 
-        println("Partida acabada!")
+        print("---")
+        println("Partida acabada! <(^_^)>")
         println("Tu has aconseguit ${tiradesGuardades[partida][tiradesPerPartida]} punts")
         println("La CPU ha aconseguit $acumuladorCPU punts")
-
+        print("----")
         if (tiradesGuardades[partida][tiradesPerPartida] > acumuladorCPU){
-            println("Has guanyat!")
+            println("Has guanyat! ＼(＾O＾)／")
         }else if (tiradesGuardades[partida][tiradesPerPartida] < acumuladorCPU){
-            println("Has perdut!")
+            println("Has perdut! (╥﹏╥)")
         }else{
-            println("Heu empatat!")
+            println("Heu empatat! (ㆆ _ ㆆ)")
         }
+        Thread.sleep(2000L)
     }
 }
