@@ -60,7 +60,7 @@ fun main(){
             /** Tirades CPU **/
             acumuladorCPU += Random.nextInt(1, 6 + 1)
         }
-
+          partides++
         println("Partida acabada!")
         println("Tu has aconseguit ${tiradesGuardades[partida][tiradesPerPartida]} punts")
         println("La CPU ha aconseguit $acumuladorCPU punts")
@@ -73,5 +73,7 @@ fun main(){
         }else{
             println("Heu empatat!")
         }
+        println("Percentatge de partides guanyes: ${String.format("%.2f",(partidasGanadas.toDouble()/partides)*100)}%")
     }
+
 }
