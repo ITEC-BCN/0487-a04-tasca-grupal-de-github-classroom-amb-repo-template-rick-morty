@@ -28,6 +28,7 @@ fun main(){
 
     // Llegim el número de quantes tirades volem fer per cada partida
     do {
+        println("--------------------------------------------------------")
         println("Quantes tirades vols fer per cada partida? (de 1 a 6)")
         tiradesPerPartida = readLine()?.toIntOrNull()
 
