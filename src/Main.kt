@@ -8,9 +8,12 @@ fun main(){
     var tiradesPerPartida: Int?
     var tiradaCPU: Int
 
-    println(DAUS)
-    println("Benvingut/da al joc dels daus.\nPer guanyar cada partida, la suma dels punts de les teves tirades dels teus daus ha de ser superior a la de la CPU")
-    println(DAUS)
+    println("      $DAUS")
+    println("""    ╔════════════════╗
+    ║ JOC DELS DAUS  ║
+    ╚════════════════╝
+(Per guanyar cada partida, la suma dels punts de les teves tirades dels teus daus ha de ser superior a la de la CPU")""")
+    println("       $DAUS\n")
 
     // Llegim el número de partides que volem jugar
     do {
