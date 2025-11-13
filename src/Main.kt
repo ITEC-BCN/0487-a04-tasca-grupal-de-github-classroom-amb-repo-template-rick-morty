@@ -1,3 +1,4 @@
+import kotlin.concurrent.thread
 import kotlin.random.Random
 
 fun main(){
@@ -10,16 +11,19 @@ fun main(){
     var partidasGanadasPerUsuario : Int = 0
     var partidasGanadasPerCPU : Int = 0
 
-    println("      $DAUS")
-    println("""    ╔════════════════╗
+    println("""    
+        ${DAUS}
+    ╔════════════════╗
     ║ JOC DELS DAUS  ║
     ╚════════════════╝
-(Per guanyar cada partida, la suma dels punts de les teves tirades dels teus daus ha de ser superior a la de la CPU")""")
-    println("       $DAUS\n")
+(Per guanyar cada partida, la suma dels punts de les teves tirades dels teus daus ha de ser superior a la de la CPU")
+        ${DAUS}
+        
+    """)
 
     // Llegim el número de partides que volem jugar
     do {
-        println("Quantes partides vols jugar? (de 1 a 3)")
+        print("Quantes partides vols jugar? (de 1 a 3) ▶ ")
         partides = readLine()?.toIntOrNull()
 
         if (partides != null && (partides < 1 || partides > 3)){
@@ -30,7 +34,7 @@ fun main(){
 
     // Llegim el número de quantes tirades volem fer per cada partida
     do {
-        println("Quantes tirades vols fer per cada partida? (de 1 a 6)")
+        print("Quantes tirades vols fer per cada partida? (de 1 a 6) ▶ ")
         tiradesPerPartida = readLine()?.toIntOrNull()
 
         if (tiradesPerPartida != null && (tiradesPerPartida < 1 || tiradesPerPartida > 6)){
@@ -49,13 +53,19 @@ fun main(){
     for(partida in 0 until partides) {
         var acumuladorCPU: Int = 0
         var tiradaActual: Int = 0
-        partides++
 
+        println("""
+            
+            ----------------------------
+            PARTIDA ${partida+1}
+          
+            ---
+        """.trimIndent())
         for (tirada in 0 until tiradesGuardades[partida].size - 1) {
             /** Tirades persona **/
-            println("Tira el dau! (Intent $tirada)")
+            println("Tira el dau! (Intent ${tirada+1})")
             tiradaActual = Random.nextInt(1, 6 + 1)
-            println("Has tret un ${CARES_DAU[tiradaActual-1]} !")
+            println("Has tret un ${CARES_DAU[tiradaActual-1]} ($tiradaActual) !")
 
             // Guardem la tirada
             tiradesGuardades[partida][tirada] = tiradaActual
@@ -64,32 +74,39 @@ fun main(){
             tiradesGuardades[partida][tiradesPerPartida] += tiradaActual
 
             /** Tirades CPU **/
-            println("La CPU tira el dau! (Intent $tirada)")
+            println("La CPU tira el dau! (Intent ${tirada+1})")
             tiradaCPU = Random.nextInt(1, 6 + 1)
             acumuladorCPU += tiradaCPU
-            println("Ha tret un ${CARES_DAU[tiradaCPU-1]} !")
-        }
+            println("Ha tret un ${CARES_DAU[tiradaCPU-1]} ($tiradaCPU) !")
 
-        println("Partida acabada!")
+            println("---------")
+        }
+        println("--------------------------------------------")
+        println("Partida acabada! <(^_^)>")
         println("Tu has aconseguit ${tiradesGuardades[partida][tiradesPerPartida]} punts")
         println("La CPU ha aconseguit $acumuladorCPU punts")
 
         if (tiradesGuardades[partida][tiradesPerPartida] > acumuladorCPU){
-            println("Has guanyat!")
+            println("Has guanyat! ＼(＾O＾)／")
             partidasGanadasPerUsuario++
         }else if (tiradesGuardades[partida][tiradesPerPartida] < acumuladorCPU){
-            println("Has perdut!")
+            println("Has perdut! (╥﹏╥)")
             partidasGanadasPerCPU++
         }else{
-            println("Heu empatat!")
+            println("Heu empatat! (ㆆ _ ㆆ)")
         }
+        Thread.sleep(2000L)
     }
     val percentageUsuario = String.format("%.2f",(partidasGanadasPerUsuario.toDouble()/partides)*100)
     val percentageCPU = String.format("%.2f",(partidasGanadasPerCPU.toDouble()/partides)*100)
-    println("════════════════════════════════════")
-    println("🎮 Estadístiques de la partida 🎮")
-    println("────────────────────────────────────")
-    println("👤 Percentatge de partides guanyades (Usuari): $percentageUsuario %")
-    println("🤖 Percentatge de partides guanyades (CPU): $percentageCPU %")
-    println("════════════════════════════════════")
+    println("""
+        
+        
+        ════════════════════════════════════
+        🎮 Estadístiques de la partida 🎮
+        ────────────────────────────────────
+        👤 Percentatge de tirades guanyades (Usuari): ${percentageUsuario} %
+        🤖 Percentatge de tirades guanyades (CPU): ${percentageCPU} %
+        ════════════════════════════════════
+    """.trimIndent())
 }
