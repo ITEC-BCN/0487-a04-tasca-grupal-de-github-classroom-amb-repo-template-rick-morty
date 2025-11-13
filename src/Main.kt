@@ -6,6 +6,7 @@ fun main(){
 
     var partides: Int?
     var tiradesPerPartida: Int?
+    var tiradaCPU: Int
 
     println(DAUS)
     println("Benvingut/da al joc dels daus.\nPer guanyar cada partida, la suma dels punts de les teves tirades dels teus daus ha de ser superior a la de la CPU")
@@ -57,7 +58,10 @@ fun main(){
             tiradesGuardades[partida][tiradesPerPartida] += tiradaActual
 
             /** Tirades CPU **/
-            acumuladorCPU += Random.nextInt(1, 6 + 1)
+            println("La CPU tira el dau! (Intent $tirada)")
+            tiradaCPU = Random.nextInt(1, 6 + 1)
+            acumuladorCPU += tiradaCPU
+            println("Ha tret un ${CARES_DAU[tiradaCPU-1]} !")
         }
 
         println("Partida acabada!")
