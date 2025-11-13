@@ -43,6 +43,7 @@ fun main(){
     for(partida in 0 until partides) {
         var acumuladorCPU: Int = 0
         var tiradaActual: Int = 0
+        var partidasGanadas : Int = 0
 
         for (tirada in 0 until tiradesGuardades[partida].size - 1) {
             /** Tirades persona **/
@@ -66,6 +67,7 @@ fun main(){
 
         if (tiradesGuardades[partida][tiradesPerPartida] > acumuladorCPU){
             println("Has guanyat!")
+            partidasGanadas++
         }else if (tiradesGuardades[partida][tiradesPerPartida] < acumuladorCPU){
             println("Has perdut!")
         }else{
