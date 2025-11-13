@@ -10,8 +10,9 @@ fun main(){
     var tiradaCPU: Int
     var partidasGanadasPerUsuario : Int = 0
     var partidasGanadasPerCPU : Int = 0
+    var partidasEmpatat : Int = 0
 
-    println("""    
+        println("""    
         ${DAUS}
     ╔════════════════╗
     ║ JOC DELS DAUS  ║
@@ -94,11 +95,13 @@ fun main(){
             partidasGanadasPerCPU++
         }else{
             println("Heu empatat! (ㆆ _ ㆆ)")
+            partidasEmpatat++
         }
         Thread.sleep(2000L)
     }
     val percentageUsuario = String.format("%.2f",(partidasGanadasPerUsuario.toDouble()/partides)*100)
     val percentageCPU = String.format("%.2f",(partidasGanadasPerCPU.toDouble()/partides)*100)
+    val percentageEmpatat = String.format("%.2f",(partidasEmpatat.toDouble()/partides)*100)
     println("""
         
         
@@ -107,6 +110,7 @@ fun main(){
         ────────────────────────────────────
         👤 Percentatge de tirades guanyades (Usuari): ${percentageUsuario} %
         🤖 Percentatge de tirades guanyades (CPU): ${percentageCPU} %
+        🤝 Percentatge de tirades empatades: ${percentageEmpatat} %
         ════════════════════════════════════
     """.trimIndent())
 }
